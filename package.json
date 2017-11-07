@@ -13,7 +13,7 @@
   "scripts": {
     "commit": "git-cz",
     "release": "release-it",
-    "start": "nodemon index.js",
+    "start": "nodemon ./demo/index.js",
     "changelog": "conventional-changelog --infile CHANGELOG.md --same-file --release-count 0 --preset angular",
     "build": "webpack --env build",
     "dev": "webpack --progress --colors --watch --env dev",
@@ -22,7 +22,7 @@
     "cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R spec test/*"
   },
   "dependencies": {
-    "@write-for-christ/prophet-samuel": "^1.0.1",
+    "@write-for-christ/prophet-samuel": "^1.1.0",
     "images": "^3.0.1",
     "rxjs": "^5.5.2"
   },
