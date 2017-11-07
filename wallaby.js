@@ -1,7 +1,7 @@
 module.exports = function(wallaby) {
   return {
     maxConsoleMessagesPerTest: 100000,
-    files: ['src/**/*.js'],
+    files: ['src/**/*.js', 'demo/**'],
 
     tests: ['test/**/*.spec.js'],
 
