@@ -1,3 +1,14 @@
-import Samuel from './core/samuel';
+import Pipe from './core/pipe';
+import PicPiper from './core/picpiper';
 
-export default (() => new Samuel())();
+function pipe(pipes, dest, options) {
+  let picpiper = new PicPiper();
+
+  for (let i = 0; i < pipes.length; i++) {
+    picpiper.addPipe(pipes[i]);
+  }
+
+  return picpiper.start();
+}
+
+export default { Pipe, pipe };
