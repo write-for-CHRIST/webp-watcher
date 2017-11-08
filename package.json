@@ -24,6 +24,7 @@
   "dependencies": {
     "@write-for-christ/prophet-samuel": "^2.0.0",
     "images": "^3.0.1",
+    "mkdirp": "^0.5.1",
     "rxjs": "^5.5.2"
   },
   "devDependencies": {
@@ -63,7 +64,7 @@
     "samuel",
     "prophet"
   ],
-  "author": "Nam Pham <nampdn@protonmail.com",
+  "author": "Nam Pham <nampdn@protonmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/write-for-CHRIST/pic-piper/issues"
