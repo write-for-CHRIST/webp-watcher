@@ -1,8 +1,8 @@
 export default class Pipe {
-  constructor(rootPath, pathResolverFunc) {
+  constructor(rootPath, opts = {}, resolver = p => p.path) {
     this._root = rootPath;
-    this._options = {};
-    this.pathResolverFunc = pathResolverFunc;
+    this._options = opts;
+    this.resolver = resolver;
   }
 
   get root() {
@@ -18,6 +18,6 @@ export default class Pipe {
   }
 
   resolve(path) {
-    return this.pathResolverFunc(path);
+    return this.resolver(path);
   }
 }
