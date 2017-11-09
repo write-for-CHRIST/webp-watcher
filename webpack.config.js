@@ -1,5 +1,5 @@
 /* global __dirname, require, module*/
-
+const fs = require('fs');
 const webpack = require('webpack');
 const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 // const DashboardPlugin = require('webpack-dashboard/plugin');
@@ -18,6 +18,16 @@ if (env === 'build') {
   // plugins.push(new DashboardPlugin());
   outputFile = libraryName + '.js';
 }
+
+// Hack for .bin
+const nodeModules = { sharp: 'commonjs sharp' };
+
+fs
+  .readdirSync('node_modules')
+  .filter(item => ['.bin'].indexOf(item) === -1) // exclude the .bin folder
+  .forEach(mod => {
+    nodeModules[mod] = 'commonjs ' + mod;
+  });
 
 const config = {
   entry: __dirname + '/src/index.js',
@@ -52,7 +62,8 @@ const config = {
   target: 'node',
   node: {
     fs: true
-  }
+  },
+  externals: nodeModules
 };
 
 module.exports = config;

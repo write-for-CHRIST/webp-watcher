@@ -28,6 +28,7 @@ node_modules
 
 # Remove some common IDE working directories
 .idea
-.vscode
+#.vscode
 .nyc_output
 .DS_Store
+demo/**/*.jpg
