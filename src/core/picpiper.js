@@ -2,14 +2,15 @@
 import path from 'path';
 import mkdirp from 'mkdirp';
 import isImage from 'is-image';
-import sharp from 'sharp';
-import { Observable } from 'rxjs';
+import isArray from 'is-array';
+import { Observable, Subject } from 'rxjs';
 import 'rxjs/add/operator/merge';
 import 'rxjs/add/operator/filter';
 
 // Internal
 import samuel from '@write-for-christ/prophet-samuel';
 import Pipe from './pipe';
+import Convert from './convert';
 
 export default class PicPiper {
   constructor(outputPath, options) {
@@ -21,6 +22,12 @@ export default class PicPiper {
     this.samuels = [];
     this.isPiping = false;
     this.combine$ = null;
+    this.onConvertSource = new Subject();
+    this.onConvert$ = this.onConvertSource.asObservable();
+  }
+
+  get onConvert() {
+    return this.onConvert$;
   }
 
   addPipe(pipe) {
@@ -70,34 +77,53 @@ export default class PicPiper {
     if (this.combine$) {
       this.combine$
         .filter(payload => {
-          let isImg = isImage(payload.path);
-          let event = payload.event === 'update';
-
-          console.log('is img: ', isImg, ' event: ', event);
-          return isImg && event;
+          return isImage(payload.path) && payload.event === 'update';
         })
         .subscribe(payload => {
-          let pathToCheck = payload.pipe.resolve(payload);
-          let destDir = path.join(this.outputPath, pathToCheck);
+          // Path resolved from consumer
+          // Should include `dir` and `filename` property
+          let pathData = payload.pipe.resolve(payload);
+          let destDir = path.join(this.outputPath, pathData.dir);
 
-          console.log('destDir: ', destDir, 'typeof: ', typeof destDir);
           if (destDir) {
-            mkdirp(destDir, function (err) {
+            let _this = this;
+
+            mkdirp(destDir, (err) => {
               if (err) {
                 throw new TypeError('Could not create path: ', destDir);
               }
-              let outPath = path.join(destDir, payload.name + '.webp');
+              let convertTo = _this.options.convertTo;
 
-              console.log('outpath: ', outPath);
-              sharp(payload.path)
-                .toFile(outPath)
-                .then(() => {
-                  console.log('Write to: ', outPath);
-                });
+              if (isArray(convertTo)) {
+                let i = convertTo.length;
+
+                while (i--) {
+                  let toPath = path.join(
+                    destDir,
+                    `${pathData.filename}.${convertTo[i].type}`
+                  );
+
+                  this._doConvert(payload.path, toPath, convertTo[i]);
+                }
+              } else {
+                let toPath = path.join(
+                  destDir,
+                  `${pathData.filename}.${convertTo.type}`
+                );
+
+                this._doConvert(payload.path, toPath, convertTo);
+              }
             });
           }
         });
     }
     return this.combine$;
+  }
+
+  _doConvert(fromPath, toPath, options) {
+    let converter = new Convert(fromPath, toPath, options);
+
+    converter.make();
+    return converter;
   }
 }
