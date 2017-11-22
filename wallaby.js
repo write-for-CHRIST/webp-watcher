@@ -14,10 +14,10 @@ module.exports = function(wallaby) {
     env: {
       type: 'node',
       runner: 'node'
-    },
-
-    compilers: {
-      '**/*.js': wallaby.compilers.babel()
     }
+
+    // compilers: {
+    //   '**/*.js': wallaby.compilers.babel()
+    // }
   };
 };

@@ -1,8 +1,7 @@
 /* global describe, it, before */
-
-import chai from 'chai';
-import picpiper from '../src/index';
-import path from 'path';
+const chai = require('chai');
+const picpiper = require('../src/index');
+const path = require('path');
 
 chai.expect();
 

@@ -14,7 +14,7 @@ fs.readFile(instructorFile, 'utf8', (err, content) => {
   // Generate random new name for mock image file
   let randomName = Math.round(Math.random() * 100);
   let relPath = path.parse(mockFile).dir;
-  let newFilePath = path.join(relPath, randomName + '.jpg');
+  let newFilePath = path.join(relPath, randomName + '-novcs.jpg');
 
   console.log('Change file: ', mockFile, 'to: ', newFilePath);
   fs.rename(mockFile, newFilePath, err => {

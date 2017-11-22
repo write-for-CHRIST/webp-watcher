@@ -1,5 +1,5 @@
-import fs from 'fs';
-import sharp from 'sharp';
+const fs = require('fs');
+const sharp = require('sharp');
 
 const SUPPORTED_TYPE = ['jpeg', 'png', 'webp', 'tiff'];
 const DEFAULT_CONFIG = {
@@ -8,7 +8,7 @@ const DEFAULT_CONFIG = {
   quality: 100
 };
 
-export default class Convert {
+module.exports = class Convert {
   constructor(fromPath, toPath, config = DEFAULT_CONFIG) {
     this.fromPath = fromPath;
     this.toPath = toPath;
@@ -38,4 +38,4 @@ export default class Convert {
       });
     });
   }
-}
+};

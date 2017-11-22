@@ -3,8 +3,7 @@
     "tagName": "v%s"
   },
   "github": {
-    "release": true,
-    "tokenRef": "GITHUB_TOKEN"
+    "release": true
   },
   "buildCommand": "npm run build",
   "afterReleaseCommand": "echo Successfully released ${version} to ${dist.repo}.",

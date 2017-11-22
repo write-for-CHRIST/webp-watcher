@@ -1,8 +1,8 @@
 {
   "name": "@write-for-christ/pic-piper",
-  "version": "0.0.1",
+  "version": "0.0.1-alpha.1",
   "description": "A useful node library to pipe the pics and convert them continously in reactive way.",
-  "main": "lib/pic-piper.js",
+  "main": "src/index.js",
   "nyc": {
     "require": [
       "babel-register"
@@ -11,6 +11,7 @@
     "instrument": false
   },
   "scripts": {
+    "prepublish": "npm run build",
     "commit": "git-cz",
     "release": "release-it",
     "simulate": "node ./demo/simulate.js",

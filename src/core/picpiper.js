@@ -1,18 +1,19 @@
 // External
-import path from 'path';
-import mkdirp from 'mkdirp';
-import isImage from 'is-image';
-import isArray from 'is-array';
-import { Observable, Subject } from 'rxjs';
-import 'rxjs/add/operator/merge';
-import 'rxjs/add/operator/filter';
+const path = require('path');
+const mkdirp = require('mkdirp');
+const isImage = require('is-image');
+const isArray = require('is-array');
+const { Observable, Subject } = require('rxjs');
+
+require('rxjs/add/operator/merge');
+require('rxjs/add/operator/filter');
 
 // Internal
-import samuel from '@write-for-christ/prophet-samuel';
-import Pipe from './pipe';
-import Convert from './convert';
+const samuel = require('@write-for-christ/prophet-samuel');
+const Pipe = require('./pipe');
+const Convert = require('./convert');
 
-export default class PicPiper {
+module.exports = class PicPiper {
   constructor(outputPath, options) {
     this.outputPath = outputPath;
     this.options = options;
@@ -126,4 +127,4 @@ export default class PicPiper {
     converter.make();
     return converter;
   }
-}
+};

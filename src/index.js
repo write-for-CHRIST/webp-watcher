@@ -1,6 +1,6 @@
-import Pipe from './core/pipe';
-import PicPiper from './core/picpiper';
-import Convert from './core/convert';
+const Pipe = require('./core/pipe');
+const PicPiper = require('./core/picpiper');
+const Convert = require('./core/convert');
 
 function pipe(pipes, dest, options) {
   let picpiper = new PicPiper(dest, options);
@@ -12,4 +12,4 @@ function pipe(pipes, dest, options) {
   return picpiper.start();
 }
 
-export default { Pipe, PicPiper, pipe, Convert };
+module.exports = { Pipe, PicPiper, pipe, Convert };

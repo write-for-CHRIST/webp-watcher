@@ -1,8 +1,8 @@
 const path = require('path');
 
-// const picpiper = require('../lib/pic-piper');
+const picpiper = require('../lib/pic-piper');
 // const picpiper = require('../src/index');
-import picpiper from '../src/index';
+// import picpiper from '../src/index';
 
 const dirOut = path.join(__dirname, '/dist');
 const dirOne = path.join(__dirname, '/origin/source1/');

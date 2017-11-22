@@ -1,4 +1,4 @@
-export default class Pipe {
+module.exports = class Pipe {
   constructor(rootPath, opts = {}, resolver = p => p.path) {
     this._root = rootPath;
     this._options = opts;
@@ -20,4 +20,4 @@ export default class Pipe {
   resolve(path) {
     return this.resolver(path);
   }
-}
+};
