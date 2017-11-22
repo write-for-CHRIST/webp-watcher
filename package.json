@@ -1,6 +1,6 @@
 {
   "name": "@write-for-christ/pic-piper",
-  "version": "0.0.1-alpha.1",
+  "version": "0.1.0",
   "description": "A useful node library to pipe the pics and convert them continously in reactive way.",
   "main": "src/index.js",
   "nyc": {
